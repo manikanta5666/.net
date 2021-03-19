@@ -1,18 +1,34 @@
-﻿namespace lab2
+﻿using System;
+namespace ErrorHandlingApplication
 {
-    public class ExExample
+    class DivNumbers
     {
-        public static void Main(string[] args)
+        int result;
+
+        DivNumbers()
+        {
+            result = 0;
+        }
+        public void division(int num1, int num2)
         {
             try
             {
-                int a = 10;
-                int b = 0;
-                int x = a / b;
+                result = num1 / num2;
             }
-            catch (Exception e) { Console.WriteLine(e); }
-            finally { Console.WriteLine("Finally block is executed"); }
-            Console.WriteLine("Rest of the code");
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine("Exception caught: {0}", e);
+            }
+            finally
+            {
+                Console.WriteLine("Result: {0}", result);
+            }
+        }
+        static void Main(string[] args)
+        {
+            DivNumbers d = new DivNumbers();
+            d.division(25, 0);
+            Console.ReadKey();
         }
     }
 }
